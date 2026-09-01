@@ -44,86 +44,113 @@ const Login = () => {
         navigate("/user/stores");
       }
     } catch (error) {
-      setError(
-        error.response?.data?.message || "Login failed. Please try again.",
-      );
+      setError(error.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="container min-vh-100 d-flex align-items-center justify-content-center bg-white">
-      <div
-        className="card shadow p-4 border-dark"
-        style={{
-          maxWidth: "450px",
-          width: "100%",
-        }}
-      >
-        <h2 className="text-center mb-4 fw-bold text-dark">Login</h2>
-
-        {error && (
-          <div className="alert alert-dark" role="alert">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label fw-semibold">
-              Email
-            </label>
-
-            <input
-              id="email"
-              type="email"
-              name="email"
-              className="form-control border-dark"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="password" className="form-label fw-semibold">
-              Password
-            </label>
-
-            <input
-              id="password"
-              type="password"
-              name="password"
-              className="form-control border-dark"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
+    <div className="min-vh-100 bg-white">
+      {/* Navbar */}
+      <nav className="navbar navbar-dark bg-dark">
+        <div className="container">
+          <span
+            className="navbar-brand fw-bold"
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/login")}
+          >
+            ShopOps
+          </span>
 
           <button
-            type="submit"
-            className="btn btn-dark w-100"
-            disabled={loading}
+            type="button"
+            className="btn btn-outline-light btn-sm"
+            onClick={() => navigate("/signup")}
           >
-            {loading ? "Logging in..." : "Login"}
+            Sign Up
           </button>
+        </div>
+      </nav>
 
-          <div className="text-center mt-4">
-            <span className="text-secondary">Don't have an account? </span>
+      {/* Login Section */}
+      <div className="container py-5">
+        <div className="row justify-content-center">
+          <div className="col-12 col-md-6 col-lg-4">
+            <div className="text-center mb-4">
+              <h1 className="fw-bold">Welcome Back</h1>
 
-            <button
-              type="button"
-              className="btn btn-link text-dark fw-semibold p-0"
-              onClick={() => navigate("/signup")}
-            >
-              Sign Up
-            </button>
+              <p className="text-secondary">Login to your ShopOps account</p>
+            </div>
+
+            <div className="card border-dark shadow-sm">
+              <div className="card-body p-4">
+                {error && <div className="alert alert-danger">{error}</div>}
+
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label fw-semibold">
+                      Email
+                    </label>
+
+                    <input
+                      id="email"
+                      type="email"
+                      name="email"
+                      className="form-control border-dark"
+                      placeholder="Enter your email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className="mb-4">
+                    <label
+                      htmlFor="password"
+                      className="form-label fw-semibold"
+                    >
+                      Password
+                    </label>
+
+                    <input
+                      id="password"
+                      type="password"
+                      name="password"
+                      className="form-control border-dark"
+                      placeholder="Enter your password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="btn btn-dark w-100"
+                    disabled={loading}
+                  >
+                    {loading ? "Logging in..." : "Login"}
+                  </button>
+                </form>
+
+                <div className="text-center mt-4">
+                  <span className="text-secondary">
+                    Don't have an account?{" "}
+                  </span>
+
+                  <button
+                    type="button"
+                    className="btn btn-link text-dark fw-semibold p-0"
+                    onClick={() => navigate("/signup")}
+                  >
+                    Sign Up
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

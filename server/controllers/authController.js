@@ -1,8 +1,9 @@
+require("dotenv").config();
 const db = require("../db");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = "online_assessment_secret_key";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const signup = async (req, res) => {
   try {
@@ -259,5 +260,5 @@ const changePassword = async (req, res) => {
 module.exports = {
   signup,
   login,
-  changePassword
+  changePassword,
 };
